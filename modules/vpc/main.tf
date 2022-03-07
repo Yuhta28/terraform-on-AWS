@@ -16,11 +16,9 @@ resource "aws_internet_gateway" "terraform-igw" {
 
 resource "aws_subnet" "terraform-public-subnet" {
   for_each = var.public-AZ
-
   vpc_id            = aws_vpc.terraform-vpc.id
   cidr_block        = each.value
   availability_zone = "ap-northeast-1${each.key}"
-
   tags = {
     Name      = "terraform-${var.Tag_Name}-public-subnet-${each.key}"
     Terraform = "True"
@@ -29,11 +27,9 @@ resource "aws_subnet" "terraform-public-subnet" {
 
 resource "aws_subnet" "terraform-private-subnet" {
   for_each = var.private-AZ
-
   vpc_id            = aws_vpc.terraform-vpc.id
   cidr_block        = each.value
   availability_zone = "ap-northeast-1${each.key}"
-
   tags = {
     Name      = "terraform-${var.Tag_Name}-private-subnet-${each.key}"
     Terraform = "True"
@@ -45,6 +41,9 @@ resource "aws_eip" "terraform-nat-eip" {
   tags = {
     Name = "${var.Tag_Name}-eip-${each.key}"
   }
+  depends_on = [
+    aws_internet_gateway.terraform-igw
+  ]
 }
 
 resource "aws_nat_gateway" "terraform-nat" {
@@ -62,9 +61,7 @@ resource "aws_nat_gateway" "terraform-nat" {
 
 resource "aws_route_table" "terraform-public-rt" {
   for_each = var.public-AZ
-
   vpc_id = aws_vpc.terraform-vpc.id
-
   tags = {
     Name      = "${var.Tag_Name}-public-rt-${each.key}"
     Terraform = "True"
@@ -73,9 +70,7 @@ resource "aws_route_table" "terraform-public-rt" {
 
 resource "aws_route_table" "terraform-private-rt" {
   for_each = var.private-AZ
-
   vpc_id = aws_vpc.terraform-vpc.id
-
   tags = {
     Name      = "${var.Tag_Name}-private-rt-${each.key}"
     Terraform = "True"
@@ -83,7 +78,6 @@ resource "aws_route_table" "terraform-private-rt" {
 }
 
 resource "aws_route_table" "terraform-main-rt" {
-
   vpc_id = aws_vpc.terraform-vpc.id
 
   tags = {
