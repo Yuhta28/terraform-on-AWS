@@ -76,12 +76,3 @@ resource "aws_route_table" "terraform-private-rt" {
     Terraform = "True"
   }
 }
-
-resource "aws_route_table" "terraform-main-rt" {
-  vpc_id = aws_vpc.terraform-vpc.id
-
-  tags = {
-    Name      = "${var.Tag_Name}-main-rt"
-    Terraform = "True"
-  }
-}
