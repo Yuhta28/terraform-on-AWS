@@ -37,15 +37,15 @@ resource "aws_subnet" "terraform-private-subnet" {
   }
 }
 
-resource "aws_eip" "terraform-nat-eip" {
-  for_each = toset(var.eip-NAT-AZ)
-  tags = {
-    Name = "${var.Tag_Name}-eip-${each.key}"
-  }
-  depends_on = [
-    aws_internet_gateway.terraform-igw
-  ]
-}
+#resource "aws_eip" "terraform-nat-eip" {
+#  for_each = toset(var.eip-NAT-AZ)
+#  tags = {
+#    Name = "${var.Tag_Name}-eip-${each.key}"
+#  }
+#  depends_on = [
+#    aws_internet_gateway.terraform-igw
+#  ]
+#}
 
 #resource "aws_nat_gateway" "terraform-nat" {
 #  for_each  = toset(var.eip-NAT-AZ)
