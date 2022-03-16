@@ -47,18 +47,18 @@ resource "aws_eip" "terraform-nat-eip" {
   ]
 }
 
-resource "aws_nat_gateway" "terraform-nat" {
-  for_each  = toset(var.eip-NAT-AZ)
-  subnet_id = aws_subnet.terraform-public-subnet[each.key].id
-  depends_on = [
-    aws_internet_gateway.terraform-igw
-  ]
-  allocation_id = aws_eip.terraform-nat-eip[each.key].id
-  tags = {
-    Name      = "${var.Tag_Name}-nat-${each.key}"
-    Terraform = "True"
-  }
-}
+#resource "aws_nat_gateway" "terraform-nat" {
+#  for_each  = toset(var.eip-NAT-AZ)
+#  subnet_id = aws_subnet.terraform-public-subnet[each.key].id
+#  depends_on = [
+#    aws_internet_gateway.terraform-igw
+#  ]
+#  allocation_id = aws_eip.terraform-nat-eip[each.key].id
+#  tags = {
+#    Name      = "${var.Tag_Name}-nat-${each.key}"
+#    Terraform = "True"
+#  }
+#}
 
 resource "aws_route_table" "terraform-public-rt" {
   for_each = var.public-AZ
