@@ -18,11 +18,6 @@ variable "key_name" {
   description = "Tag Name"
 }
 
-variable "EC2-SG" {
-  type        = list(string)
-  description = "SG attached to EC2"
-}
-
 variable "terraform-public-subnet-id" {
   description = "terraform-public-subnet-id"
 }
