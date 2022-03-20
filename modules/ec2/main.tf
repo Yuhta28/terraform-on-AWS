@@ -4,7 +4,9 @@ resource "aws_instance" "terraform-ec2" {
   subnet_id                   = var.terraform-public-subnet-id[0]
   associate_public_ip_address = true
   key_name                    = var.key_name
-  vpc_security_group_ids      = aws_security_group.terraform-ec2-sg-for-ssh.id
+  vpc_security_group_ids      = [ 
+    aws_security_group.terraform-ec2-sg-for-ssh.id
+  ]
   tags = {
     Name      = "${var.Tag_Name}-ec2"
     Terraform = "True"
