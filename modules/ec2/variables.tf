@@ -23,4 +23,8 @@ variable "EC2-SG" {
   description = "SG attached to EC2"
 }
 
-variable "terraform-public-subnet-id" {}
+# variable "terraform-public-subnet-id" {}
+variable "terraform-public-subnet-id" {
+  type        = list(string)
+  description = "terraform-public-subnet-id"
+}
