@@ -63,6 +63,11 @@ resource "aws_subnet" "terraform-private-subnet" {
 resource "aws_route_table" "terraform-public-rt" {
   for_each = var.public-AZ
   vpc_id   = aws_vpc.terraform-vpc.id
+  route = [
+    {
+      cidr_block = "0.0.0.0/0"
+      gateway_id = aws_internet_gateway.terraform-igw.id
+  ]
   tags = {
     Name      = "${var.Tag_Name}-public-rt-${each.key}"
     Terraform = "True"
