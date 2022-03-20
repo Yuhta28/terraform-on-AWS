@@ -1,4 +1,4 @@
-variable "terraform-public-subnet-id" {}
+#variable "terraform-public-subnet-id" {}
 
 resource "aws_instance" "terraform-ec2" {
   ami           = var.ami
