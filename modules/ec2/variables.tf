@@ -12,3 +12,15 @@ variable "Tag_Name" {
   type        = string
   description = "Tag Name"
 }
+
+variable "key_name" {
+  type        = string
+  description = "Tag Name"
+}
+
+variable "EC2-SG" {
+  type        = list(string)
+  description = "SG attached to EC2"
+}
+
+variable "terraform-public-subnet-id" {}
