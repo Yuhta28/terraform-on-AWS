@@ -1,5 +1,3 @@
-#variable "terraform-public-subnet-id" {}
-
 resource "aws_instance" "terraform-ec2" {
   ami           = var.ami
   instance_type = var.ec2_instance_type
