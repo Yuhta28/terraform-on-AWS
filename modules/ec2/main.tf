@@ -22,4 +22,5 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     protocol = "tcp"
     cidr_blocks = ["153.156.83.95/32"]
   }
+  tags = "${var.Tag_Name}-SSH"
 }
