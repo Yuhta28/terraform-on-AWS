@@ -76,7 +76,7 @@ resource "aws_route_table" "terraform-public-rt" {
 resource "aws_route_table_association" "terraform-public-rt-assoc" {
   for_each = var.public-AZ
   subnet_id = aws_subnet.terraform-public-subnet[each.key].id
-  route_table_id = aws_route_table.terraform-public-rt.id
+  route_table_id = aws_route_table.terraform-public-rt[each.key].id
 }
 
 resource "aws_route_table" "terraform-private-rt" {
