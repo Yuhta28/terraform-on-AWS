@@ -26,3 +26,7 @@ variable "EC2-SG" {
 variable "terraform-public-subnet-id" {
   description = "terraform-public-subnet-id"
 }
+
+variable "terraform-vpc-id" {
+  description = "terraform-vpc-id"
+}
