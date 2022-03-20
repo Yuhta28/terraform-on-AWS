@@ -1,8 +1,9 @@
 resource "aws_instance" "terraform-ec2" {
-    ami = "ami-04204a8960917fd92"
-    instance_type = "t2.micro"
-    tags = {
-        Name = "terraform-ec2"
-    }
-  
+  ami           = var.ami
+  instance_type = var.ec2_instance_type
+  tags = {
+    Name      = "${var.Tag_Name}-ec2"
+    Terraform = "True"
+  }
+
 }

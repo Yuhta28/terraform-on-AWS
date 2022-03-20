@@ -15,10 +15,10 @@ resource "aws_internet_gateway" "terraform-igw" {
 }
 
 resource "aws_subnet" "terraform-public-subnet" {
-  for_each          = var.public-AZ
-  vpc_id            = aws_vpc.terraform-vpc.id
-  cidr_block        = each.value
-  availability_zone = "ap-northeast-1${each.key}"
+  for_each                = var.public-AZ
+  vpc_id                  = aws_vpc.terraform-vpc.id
+  cidr_block              = each.value
+  availability_zone       = "ap-northeast-1${each.key}"
   map_public_ip_on_launch = true
   tags = {
     Name      = "terraform-${var.Tag_Name}-public-subnet-${each.key}"
