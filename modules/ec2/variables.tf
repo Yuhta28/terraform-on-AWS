@@ -13,4 +13,4 @@ variable "Tag_Name" {
   description = "Tag Name"
 }
 
- "terraform-public-subnet-id" {}
+variable "terraform-public-subnet-id" {}
