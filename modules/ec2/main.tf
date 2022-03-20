@@ -21,4 +21,5 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     to_port = 22
     protocol = "tcp"
     cidr_blocks = ["153.156.83.95/32"]
+  }
 }
