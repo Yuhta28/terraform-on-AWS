@@ -1,3 +1,11 @@
+data "aws_subnet_ids" "terraform-public-subnet-id" {
+  vpc_id = var.terraform-vpc-id
+    filter {
+    name   = "tag:Name"
+    values = ["public"]
+  }
+}
+
 resource "aws_instance" "terraform-ec2" {
   ami                         = var.ami
   instance_type               = var.ec2_instance_type
