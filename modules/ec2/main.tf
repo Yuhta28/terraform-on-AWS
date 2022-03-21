@@ -83,5 +83,6 @@ resource "aws_lb" "terraform-alb" {
   security_groups = [
     aws_security_group.web_server_sg.id
   ]
-  subnets =  [for subnet in var.terraform-public-subnet-id : subnet.id]
+#  subnets =  [for subnet in var.terraform-public-subnet-id : subnet.id]
+  subnets =  ["subnet-046b28c6889f479b9", "subnet-010adb826637c2663"]
 }
