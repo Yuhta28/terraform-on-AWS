@@ -11,5 +11,5 @@ data "aws_subnet" "terraform-subnet" {
 }
 
 output "terraform-subnet-ids" {
-  value = [for s in data.aws_subnet.terraform-subnet : s.subnet_id]
+  value = [for s in data.aws_subnet.terraform-subnet : s.id]
 }
