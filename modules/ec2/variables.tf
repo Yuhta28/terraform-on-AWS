@@ -19,7 +19,7 @@ variable "key_name" {
 }
 
 variable "terraform-public-subnet-id" {
-  type = list(string)
+  type        = list(string)
   description = "terraform-public-subnet-id"
 }
 
