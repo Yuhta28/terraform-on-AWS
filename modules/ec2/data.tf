@@ -6,10 +6,10 @@ data "aws_subnets" "terraform-subnets" {
 }
 
 data "aws_subnet" "terraform-subnet" {
-  for_each = toset(data.aws_subnets.terraform-subnets.ids)
+  for_each = toset(data.aws_subnets.terraform-subnets.id)
   id       = each.value
 }
 
 output "terraform-subnet-ids" {
-  value = toset(data.aws_subnet.terraform-subnet.ids)
+  value = toset(data.aws_subnet.terraform-subnet.id)
 }
