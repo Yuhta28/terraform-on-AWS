@@ -1,7 +1,7 @@
 resource "aws_instance" "terraform-ec2" {
   ami                         = var.ami
   instance_type               = var.ec2_instance_type
-  subnet_id                   = var.terraform-public-subnet-id[0]
+  subnet_id                   = var.terraform-public-subnet-id
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [
@@ -83,6 +83,5 @@ resource "aws_lb" "terraform-alb" {
   security_groups = [
     aws_security_group.web_server_sg.id
   ]
-#  subnets =  [for subnet in var.terraform-public-subnet-id : subnet.id]
   subnets =  var.terraform-public-subnet-id
 }
