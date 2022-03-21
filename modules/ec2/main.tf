@@ -1,7 +1,8 @@
 resource "aws_instance" "terraform-ec2" {
+  for_each = toset(var.terraform-public-subnet-id)
   ami                         = var.ami
   instance_type               = var.ec2_instance_type
-  subnet_id                   = var.terraform-public-subnet-id
+  subnet_id                   = var.terraform-public-subnet-id["each.key"]
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [
