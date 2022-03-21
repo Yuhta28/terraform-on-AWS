@@ -26,7 +26,3 @@ variable "terraform-public-subnet-id" {
 variable "terraform-vpc-id" {
   description = "terraform-vpc-id"
 }
-
-#variable "terraform-subnet-ids" {
-#  description = "terraform-subnet-ids"
-#}
