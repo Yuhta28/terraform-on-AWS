@@ -10,7 +10,7 @@ data "aws_subnet" "terraform-subnet" {
   id       = each.value
   filter {
     name   = "tag:Name"
-    values = "*public*"
+    values = ["*private*"]
   }
 }
 
