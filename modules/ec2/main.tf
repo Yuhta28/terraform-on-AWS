@@ -36,3 +36,15 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     Terraform = "True"
   }
 }
+
+resource "aws_lb_target_group" "terraform-tg" {
+    name = "${var.Tag_Name}-tg"
+    port = 80
+    protocol = "HTTP"
+    vpc_id = var.terraform-vpc-id
+}
+
+resource "aws_lb_target_group_attachment" "terraform-tg-attach" {
+    target_group_arn = aws_lb_target_group.terraform-tg.arn
+    target_id = aws_instance.terraform-ec2.id 
+}
