@@ -36,3 +36,52 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     Terraform = "True"
   }
 }
+
+resource "aws_lb_target_group" "terraform-tg" {
+  name     = "${var.Tag_Name}-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.terraform-vpc-id
+}
+
+resource "aws_lb_target_group_attachment" "terraform-tg-attach" {
+  target_group_arn = aws_lb_target_group.terraform-tg.arn
+  target_id        = aws_instance.terraform-ec2.id
+}
+
+resource "aws_security_group" "web_server_sg" {
+  name        = "web_server"
+  description = "Allow http and https traffic."
+  vpc_id      = var.terraform-vpc-id
+}
+
+resource "aws_security_group_rule" "inbound_http" {
+  type      = "ingress"
+  from_port = 80
+  to_port   = 80
+  protocol  = "tcp"
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+  security_group_id = aws_security_group.web_server_sg.id
+}
+
+resource "aws_security_group_rule" "inbound_https" {
+  type      = "ingress"
+  from_port = 443
+  to_port   = 443
+  protocol  = "tcp"
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+  security_group_id = aws_security_group.web_server_sg.id
+}
+
+resource "aws_lb" "terraform-alb" {
+  name     = "${var.Tag_Name}-alb"
+  internal = true
+  security_groups = [
+    aws_security_group.web_server_sg.id
+  ]
+  subnets =  var.terraform-public-subnet-id
+}
