@@ -1,4 +1,4 @@
-data "aws_suaws_subnets" "terraform-subnets" {
+data "aws_subnets" "terraform-subnets" {
     filter {
     name   = "vpc-id"
     values = [var.terraform-vpc-id]
