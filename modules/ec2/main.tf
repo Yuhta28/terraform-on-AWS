@@ -1,17 +1,17 @@
-#resource "aws_instance" "terraform-ec2" {
-#  ami                         = var.ami
-#  instance_type               = var.ec2_instance_type
-#  subnet_id                   = var.terraform-public-subnet-id[0]
-#  associate_public_ip_address = true
-#  key_name                    = var.key_name
-#  vpc_security_group_ids = [
-#    aws_security_group.terraform-ec2-sg-for-ssh.id
-#  ]
-#  tags = {
-#    Name      = "${var.Tag_Name}-ec2"
-#    Terraform = "True"
-#  }
-#}
+resource "aws_instance" "terraform-ec2" {
+  ami                         = var.ami
+  instance_type               = var.ec2_instance_type
+  subnet_id                   = var.terraform-public-subnet-id[0]
+  associate_public_ip_address = true
+  key_name                    = var.key_name
+  vpc_security_group_ids = [
+    aws_security_group.terraform-ec2-sg-for-ssh.id
+  ]
+  tags = {
+    Name      = "${var.Tag_Name}-ec2"
+    Terraform = "True"
+  }
+}
 
 resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
   name        = "${var.Tag_Name}-SSH"
@@ -22,7 +22,7 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["153.156.83.95/32"]
+    cidr_blocks = ["27.110.13.170/32"]
   }
   egress {
     from_port        = 0
