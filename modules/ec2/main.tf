@@ -16,7 +16,7 @@
 resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
   name        = "${var.Tag_Name}-SSH"
   description = "Security group for ${var.Tag_Name}-ec2"
-  vpc_id      = var.terraform-vpc-id
+  vpc_id      = var.terraform-vpc
 
   ingress {
     from_port   = 22
@@ -40,7 +40,7 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
 resource "aws_security_group" "web_server_sg" {
   name        = "web_server"
   description = "Allow http and https traffic."
-  vpc_id      = var.terraform-vpc-id
+  vpc_id      = var.terraform-vpc
   tags = {
     "Name" = "web_server-${var.Tag_Name}"
   }
