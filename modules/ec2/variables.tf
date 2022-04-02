@@ -28,7 +28,7 @@ variable "terraform-vpc-id" {
   description = "VPC ID"
 }
 
-variable "homeIP" {
+variable "spacelift_account_name" {
   type        = string
   description = "homeIP"
 }
