@@ -1,3 +1,8 @@
+data "spacelift_environment_variable" "homeIP" {
+  stack_id = "module-terraform"
+  name     = "homeIP"
+}
+
 #resource "aws_instance" "terraform-ec2" {
 #  ami                         = var.ami
 #  instance_type               = var.ec2_instance_type
@@ -22,7 +27,7 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.homeIP]
+    cidr_blocks = [data.spacelift_environment_variable.homeIP.value]
   }
   egress {
     from_port        = 0
