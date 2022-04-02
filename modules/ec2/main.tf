@@ -22,7 +22,7 @@ resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["27.110.13.170/32"]
+    cidr_blocks = [var.homeIP]
   }
   egress {
     from_port        = 0
