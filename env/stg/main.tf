@@ -1,5 +1,3 @@
-#provider "aws" {
-#  region = "ap-northeast-1"
-#}
-
-provider "spacelift" {}
+provider "aws" {
+  region = "ap-northeast-1"
+}
