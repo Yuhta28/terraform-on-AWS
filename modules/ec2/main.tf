@@ -1,7 +1,7 @@
-#data "spacelift_environment_variable" "homeIP" {
-#  stack_id = "module-terraform"
-#  name     = "homeIP"
-#}
+data "spacelift_environment_variable" "homeIP" {
+  stack_id = "module-terraform"
+  name     = "homeIP"
+}
 
 #resource "aws_instance" "terraform-ec2" {
 #  ami                         = var.ami
