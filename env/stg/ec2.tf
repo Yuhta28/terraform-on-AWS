@@ -5,5 +5,5 @@ module "staging-ec2" {
   Tag_Name                   = "staging"
   key_name                   = "WindowsKey"
   terraform-public-subnet-id = [module.staging-vpc.terraform-public-subnet-id][0]
-  terraform-vpc           = module.staging-vpc.terraform-vpc.id
+  terraform-vpc-id           = module.staging-vpc.terraform-vpc.id
 }
