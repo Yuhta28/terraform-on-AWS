@@ -6,5 +6,4 @@ module "staging-ec2" {
   key_name                   = "WindowsKey"
   terraform-public-subnet-id = [module.staging-vpc.terraform-public-subnet-id][0]
   terraform-vpc-id           = module.staging-vpc.terraform-vpc.id
-  homeIP                     = ""
 }
