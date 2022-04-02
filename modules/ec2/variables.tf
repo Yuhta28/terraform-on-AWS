@@ -27,3 +27,8 @@ variable "terraform-vpc-id" {
   type        = string
   description = "VPC ID"
 }
+
+variable "homeIP" {
+  type        = string
+  description = "homeIP"
+}
