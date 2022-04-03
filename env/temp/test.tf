@@ -15,4 +15,5 @@ resource "aws_security_group" "terraform-test" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = [var.homeIP]
+ }
 }
