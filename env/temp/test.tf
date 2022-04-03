@@ -2,10 +2,6 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
-variable "homeIP" {
-  type        = string  
-}
-
 resource "aws_security_group" "terraform-test" {
   name        = "web_server"
   description = "Allow http and https traffic."

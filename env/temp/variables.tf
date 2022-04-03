@@ -1,0 +1,3 @@
+variable "homeIP" {
+  type        = string  
+}
