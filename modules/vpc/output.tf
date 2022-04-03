@@ -3,7 +3,7 @@ output "terraform-public-subnet-id" {
   description = "Public Subnet ID"
 }
 
-output "terraform-vpc-id" {
-  value       = aws_vpc.terraform-vpc.id
-  description = "VPC ID"
+output "terraform-vpc" {
+  value       = aws_vpc.terraform-vpc
+  description = "VPC"
 }

@@ -24,5 +24,12 @@ variable "terraform-public-subnet-id" {
 }
 
 variable "terraform-vpc-id" {
-  description = "terraform-vpc-id"
+  type        = string
+  description = "VPC ID"
+}
+
+variable "homeIP" {
+  type        = string
+  default = "27.110.13.170/32"
+  description = "homeIP"
 }
