@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "terraform-test" {
-  name        = "web_server"
+  name        = "debug-test-sg"
   description = "Allow http and https traffic."
   vpc_id      = "vpc-08a74159dc7faf88e"
   egress {
