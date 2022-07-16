@@ -28,7 +28,7 @@ resource "aws_lb_listener" "terraform-alb-listener-http" {
 }
 
 resource "aws_lb_target_group" "terraform-http" {
-  name        = "${var.Tag_Name}-tg"
+  name        = "${var.Tag_Name}-tg-http"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = var.terraform-vpc-id
@@ -48,6 +48,8 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
   load_balancer_arn = aws_lb.terraform-alb.arn
   port              = 443
   protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   =  data.aws_acm_certificate.yuta-aws.arn
   default_action {
     target_group_arn = aws_lb_target_group.terraform-https.arn
     type             = "forward"
@@ -55,7 +57,7 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
 }
 
 resource "aws_lb_target_group" "terraform-https" {
-  name     = "${var.Tag_Name}-tg"
+  name     = "${var.Tag_Name}-tg-https"
   port     = 443
   protocol = "HTTPS"
   vpc_id   = var.terraform-vpc-id
