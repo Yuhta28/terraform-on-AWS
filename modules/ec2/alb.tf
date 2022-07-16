@@ -51,7 +51,7 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = data.aws_acm_certificate.yuta-aws.arn
   default_action {
-    target_group_arn = aws_lb_target_group.terraform-https.arn
+    target_group_arn = aws_lb_target_group.terraform-http.arn
     type             = "forward"
   }
 }
