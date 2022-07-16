@@ -7,6 +7,13 @@ resource "aws_instance" "terraform-ec2" {
   vpc_security_group_ids = [
     aws_security_group.terraform-ec2-sg-for-ssh.id
   ]
+  root_block_device {
+    volume_type = "gp3"
+    tags = {
+      Name      = "${var.Tag_Name}-ebs"
+      Terraform = "True"
+    }
+  }
   tags = {
     Name      = "${var.Tag_Name}-ec2"
     Terraform = "True"
