@@ -5,10 +5,12 @@ resource "aws_instance" "terraform-ec2" {
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [
-    aws_security_group.terraform-ec2-sg-for-ssh.id
+    aws_security_group.terraform-ec2-sg-for-ssh.id,
+    aws_security_group.web_server_sg.id
   ]
   root_block_device {
     volume_type = "gp3"
+    volume_size = "30"
     tags = {
       Name      = "${var.Tag_Name}-ebs"
       Terraform = "True"
