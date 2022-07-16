@@ -30,6 +30,6 @@ variable "terraform-vpc-id" {
 
 variable "homeIP" {
   type        = string
-  default = "27.110.13.170/32"
+  default     = "27.110.13.170/32"
   description = "homeIP"
 }
