@@ -6,7 +6,8 @@ resource "aws_instance" "terraform-ec2" {
   key_name                    = var.key_name
   vpc_security_group_ids = [
     data.aws_security_group.terraform-ec2-sg-for-ssh.id,
-    aws_security_group.web_server_sg.id
+    aws_security_group.web_server_sg.id,
+    aws_security_group.terraform-alb-to-ec2.id
   ]
   root_block_device {
     volume_type = "gp3"
