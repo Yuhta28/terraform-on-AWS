@@ -55,16 +55,3 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
     type             = "forward"
   }
 }
-
-resource "aws_lb_target_group" "terraform-https" {
-  name     = "${var.Tag_Name}-tg-https"
-  port     = 443
-  protocol = "HTTPS"
-  vpc_id   = var.terraform-vpc-id
-}
-
-resource "aws_lb_target_group_attachment" "terraform-tg-attach-https" {
-  target_group_arn = aws_lb_target_group.terraform-https.arn
-  target_id        = aws_instance.terraform-ec2.id
-  port             = 443
-}
