@@ -5,7 +5,7 @@ resource "aws_instance" "terraform-ec2" {
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [
-    aws_security_group.terraform-ec2-sg-for-ssh.id,
+    data.aws_security_group.terraform-ec2-sg-for-ssh.id,
     aws_security_group.web_server_sg.id
   ]
   root_block_device {
@@ -21,30 +21,33 @@ resource "aws_instance" "terraform-ec2" {
     Terraform = "True"
   }
 }
-
-resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
-  name        = "${var.Tag_Name}-SSH"
-  description = "Security group for ${var.Tag_Name}-ec2"
-  vpc_id      = var.terraform-vpc-id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.homeIP]
-  }
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  tags = {
-    Name      = "${var.Tag_Name}-SSH"
-    Terraform = "True"
-  }
+data "aws_security_group" "terraform-ec2-sg-for-ssh" {
+  id = "sg-067d2053dfc17b053"
 }
+
+#resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
+#  name        = "${var.Tag_Name}-SSH"
+#  description = "Security group for ${var.Tag_Name}-ec2"
+#  vpc_id      = var.terraform-vpc-id
+#
+#  ingress {
+#    from_port   = 22
+#    to_port     = 22
+#    protocol    = "tcp"
+#    cidr_blocks = [var.homeIP]
+#  }
+#  egress {
+#    from_port        = 0
+#    to_port          = 0
+#    protocol         = "-1"
+#    cidr_blocks      = ["0.0.0.0/0"]
+#    ipv6_cidr_blocks = ["::/0"]
+#  }
+#  tags = {
+#    Name      = "${var.Tag_Name}-SSH"
+#    Terraform = "True"
+#  }
+#}
 
 resource "aws_security_group" "web_server_sg" {
   name        = "web_server"
