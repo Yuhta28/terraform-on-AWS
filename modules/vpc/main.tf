@@ -82,10 +82,10 @@ resource "aws_route_table_association" "terraform-public-rt-assoc" {
 resource "aws_route_table" "terraform-private-rt" {
   for_each = var.private-AZ
   vpc_id   = aws_vpc.terraform-vpc.id
-#  route {
-#    cidr_block = "0.0.0.0/0"
-#    nat_gateway_id = aws_nat_gateway.terraform-nat.id
-#  }
+  #  route {
+  #    cidr_block = "0.0.0.0/0"
+  #    nat_gateway_id = aws_nat_gateway.terraform-nat.id
+  #  }
   tags = {
     Name      = "${var.Tag_Name}-private-rt-${each.key}"
     Terraform = "True"
