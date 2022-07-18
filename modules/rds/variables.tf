@@ -12,3 +12,13 @@ variable "db_subnet_group_description" {
   type        = string
   description = "terraform-db-subnet-description"
 }
+
+variable "db_cluster_name" {
+  type        = string
+  description = "terraform-db-cluster-name"
+}
+
+variable "db_cluster_instance" {
+  type        = string
+  description = "terraform-db-instance-type"
+}
