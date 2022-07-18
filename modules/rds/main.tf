@@ -13,9 +13,9 @@ resource "aws_rds_cluster" "terraform-aurora-cluster" {
   cluster_identifier = var.db_cluster_name
   engine = "aurora-mysql"
   db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
-  database_name = "mydb"
-  master_username = "foo"
-  master_password = "barbut8chars"    
+  database_name = "wordpress-db"
+  master_username = "bar"
+  master_password = "barbut8chars"
   tags = {
     Terraform = "True"
   }
