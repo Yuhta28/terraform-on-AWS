@@ -27,6 +27,7 @@ resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
   cluster_identifier = aws_rds_cluster.terraform-aurora-cluster.id
   instance_class = var.db_cluster_instance
   db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
+  engine = aws_rds_cluster.terraform-aurora-cluster.engine
   tags = {
     Terraform = "True"
   }
