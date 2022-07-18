@@ -12,6 +12,7 @@ resource "aws_db_subnet_group" "terraform-db-subnet" {
 resource "aws_rds_cluster" "terraform-aurora-cluster" {
   cluster_identifier = var.db_cluster_name
   engine = "aurora-mysql"
+  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
 
   tags = {
     Terraform = "True"
