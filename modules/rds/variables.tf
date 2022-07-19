@@ -1,3 +1,8 @@
+variable "Tag_Name" {
+  type        = string
+  default = "staging"
+}
+
 variable "db_subnet_group_name" {
   type        = string
   description = "terraform-db-subnet-group-name"

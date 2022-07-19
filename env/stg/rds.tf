@@ -7,4 +7,5 @@ module "staging-rds" {
   db_subnet_group_ids          = [module.staging-vpc.terraform-private-subnet-a.id, module.staging-vpc.terraform-private-subnet-c.id]
   db_cluster_name             = "terraform-staging-aurora"
   db_cluster_instance         = "db.t3.small"
+  Tag_Name                    = "staging"
 }
