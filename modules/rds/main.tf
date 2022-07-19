@@ -1,10 +1,35 @@
 resource "aws_db_subnet_group" "terraform-db-subnet" {
-  name        = var.db_sunet_group_name
-  subnet_ids  = var.db_sunet_group_ids
+  name        = var.db_subnet_group_name
+  subnet_ids  = var.db_subnet_group_ids
   description = var.db_subnet_group_description
 
   tags = {
-    Name      = var.db_sunet_group_name
+    Name      = var.db_subnet_group_name
+    Terraform = "True"
+  }
+}
+
+resource "aws_security_group" "terraform-ec2-to-db" {
+  name        = "${var.Tag_Name}-ec2-to-db"
+  description = "Security group for ${var.Tag_Name}-db connected ec2"
+  vpc_id      = var.terraform-vpc-id
+
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "-1"
+#    security_groups = [aws_security_group.web_server_sg.id]
+    security_groups = var.ec2_to_db_security_groups_id
+  }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  tags = {
+    Name      = "${var.Tag_Name}-ec2-to-db"
     Terraform = "True"
   }
 }
