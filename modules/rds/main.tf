@@ -17,7 +17,7 @@ resource "aws_security_group" "terraform-ec2-to-db" {
   ingress {
     from_port       = 3306
     to_port         = 3306
-    protocol        = "-1"
+    protocol        = "tcp"
 #    security_groups = [aws_security_group.web_server_sg.id]
     security_groups = var.ec2_to_db_security_groups_id
   }
