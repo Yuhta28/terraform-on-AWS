@@ -27,3 +27,8 @@ variable "terraform-vpc-id" {
   type        = string
   description = "VPC ID"
 }
+
+variable "terraform_rds_cluster" {
+  type        = string
+  description = "TerraformRDS"
+}
