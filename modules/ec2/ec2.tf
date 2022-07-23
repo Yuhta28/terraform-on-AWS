@@ -16,20 +16,10 @@ resource "aws_instance" "terraform-ec2" {
       Terraform = "True"
     }
   }
-  user_data = <<EOF
-  #!/bin/bash
-  aws rds describe-db-clusters \
-  --db-cluster-identifier terraform-staging-aurora \
-  --query 'DBClusters[*].Endpoint | [0]'
-  EOF
-
   tags = {
     Name      = "${var.Tag_Name}-ec2"
     Terraform = "True"
   }
-  depends_on = [
-    aws_rds_cluster.terraform-aurora-cluster
-  ]
 }
 data "aws_security_group" "terraform-ec2-sg-for-ssh" {
   id = "sg-067d2053dfc17b053"
