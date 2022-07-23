@@ -28,7 +28,7 @@ resource "aws_instance" "terraform-ec2" {
     Terraform = "True"
   }
   depends_on = [
-    var.terraform_rds_cluster
+    aws_rds_cluster.terraform-aurora-cluster
   ]
 }
 data "aws_security_group" "terraform-ec2-sg-for-ssh" {
