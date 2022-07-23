@@ -38,6 +38,7 @@ resource "aws_rds_cluster" "terraform-aurora-cluster" {
   engine = "aurora-mysql"
   db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
   snapshot_identifier = "terraform-staging-snapshot"
+  skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
   tags = {
     Terraform = "True"
