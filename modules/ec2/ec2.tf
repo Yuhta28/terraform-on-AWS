@@ -1,4 +1,5 @@
 resource "aws_instance" "terraform-ec2" {
+  count = 2
   ami                         = var.ami
   instance_type               = var.ec2_instance_type
   subnet_id                   = var.terraform-public-subnet-id[0]
