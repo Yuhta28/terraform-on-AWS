@@ -18,7 +18,6 @@ resource "aws_security_group" "terraform-ec2-to-db" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-#    security_groups = [aws_security_group.web_server_sg.id]
     security_groups = var.ec2_to_db_security_groups_id
   }
   egress {
@@ -34,26 +33,24 @@ resource "aws_security_group" "terraform-ec2-to-db" {
   }
 }
 
-#resource "aws_rds_cluster" "terraform-aurora-cluster" {
-#  cluster_identifier = var.db_cluster_name
-#  engine = "aurora-mysql"
-#  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
-#  database_name = "wordpress"
-#  master_username = "bar"
-#  master_password = "barbut8chars"
-#  tags = {
-#    Terraform = "True"
-#  }
-#}
-#
-#resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
-#  count = 1
-#  identifier = "${var.db_cluster_name}-instance"
-#  cluster_identifier = aws_rds_cluster.terraform-aurora-cluster.id
-#  instance_class = var.db_cluster_instance
-#  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
-#  engine = aws_rds_cluster.terraform-aurora-cluster.engine
-#  tags = {
-#    Terraform = "True"
-#  }
-#}
+resource "aws_rds_cluster" "terraform-aurora-cluster" {
+  cluster_identifier = var.db_cluster_name
+  engine = "aurora-mysql"
+  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
+  snapshot_identifier = "terraform-staging-snapshot"
+  vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
+  tags = {
+    Terraform = "True"
+  }
+}
+
+resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
+  identifier = "${var.db_cluster_name}-instance"
+  cluster_identifier = aws_rds_cluster.terraform-aurora-cluster.id
+  instance_class = var.db_cluster_instance
+  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
+  engine = aws_rds_cluster.terraform-aurora-cluster.engine
+  tags = {
+    Terraform = "True"
+  }
+}
