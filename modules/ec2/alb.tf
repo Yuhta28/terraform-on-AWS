@@ -36,13 +36,13 @@ resource "aws_lb_target_group" "terraform-http" {
 
 resource "aws_lb_target_group_attachment" "terraform-tg-attach-http" {
   target_group_arn = aws_lb_target_group.terraform-http.arn
-  target_id        = aws_instance.terraform-ec2[count.index].id
+  target_id        = aws_instance.terraform-ec2[0].id
   port             = 80
 }
 
 resource "aws_lb_target_group_attachment" "terraform-tg-attach-http2" {
   target_group_arn = aws_lb_target_group.terraform-http.arn
-  target_id        = aws_instance.terraform-ec2[count.index].id
+  target_id        = aws_instance.terraform-ec2[1].id
   port             = 80
 }
 
