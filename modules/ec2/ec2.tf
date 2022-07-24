@@ -6,7 +6,7 @@ resource "aws_instance" "terraform-ec2" {
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [
-    data.aws_security_group.terraform-ec2-sg-for-ssh.id,
+    aws_security_group.terraform-ec2-sg-for-ssh.id,
     aws_security_group.terraform-alb-to-ec2.id
   ]
   root_block_device {
