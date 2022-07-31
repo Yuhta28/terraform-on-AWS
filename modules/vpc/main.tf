@@ -1,4 +1,5 @@
 resource "aws_vpc" "terraform-vpc" {
+  enable_dns_hostnames = true
   cidr_block = var.cidr_block
   tags = {
     Name      = "${var.Tag_Name}-vpc"
