@@ -23,9 +23,6 @@ resource "aws_instance" "terraform-ec2" {
   }
 }
 
-#data "aws_security_group" "terraform-ec2-sg-for-ssh" {
-#  id = "sg-067d2053dfc17b053"
-#}
 resource "aws_security_group" "terraform-ec2-sg-for-ssh" {
   name        = "${var.Tag_Name}-ssh"
   description = "Security group for ${var.Tag_Name}-ssh"
