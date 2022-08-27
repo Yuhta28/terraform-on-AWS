@@ -33,25 +33,25 @@ resource "aws_security_group" "terraform-ec2-to-db" {
   }
 }
 
-resource "aws_rds_cluster" "terraform-aurora-cluster" {
-  cluster_identifier = var.db_cluster_name
-  engine = "aurora-mysql"
-  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
-  snapshot_identifier = "terraform-staging-snapshot"
-  skip_final_snapshot  = true
-  vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
-  tags = {
-    Terraform = "True"
-  }
-}
-
-resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
-  identifier = "${var.db_cluster_name}-instance"
-  cluster_identifier = aws_rds_cluster.terraform-aurora-cluster.id
-  instance_class = var.db_cluster_instance
-  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
-  engine = aws_rds_cluster.terraform-aurora-cluster.engine
-  tags = {
-    Terraform = "True"
-  }
-}
+#resource "aws_rds_cluster" "terraform-aurora-cluster" {
+#  cluster_identifier = var.db_cluster_name
+#  engine = "aurora-mysql"
+#  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
+#  snapshot_identifier = "terraform-staging-snapshot"
+#  skip_final_snapshot  = true
+#  vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
+#  tags = {
+#    Terraform = "True"
+#  }
+#}
+#
+#resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
+#  identifier = "${var.db_cluster_name}-instance"
+#  cluster_identifier = aws_rds_cluster.terraform-aurora-cluster.id
+#  instance_class = var.db_cluster_instance
+#  db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
+#  engine = aws_rds_cluster.terraform-aurora-cluster.engine
+#  tags = {
+#    Terraform = "True"
+#  }
+#}
