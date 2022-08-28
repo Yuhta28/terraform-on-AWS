@@ -33,6 +33,18 @@ resource "aws_security_group" "terraform-ec2-to-db" {
   }
 }
 
+resource "aws_rds_cluster_parameter_group" "terraform-aurora-cluster-parameter" {
+  name        = var.aurora_cluster_parameter_group_name
+  family      = "aurora-mysql5.7"
+  description = "RDS terraform aurora cluster parameter group"
+}
+
+resource "aws_db_parameter_group" "terraform-aurora-instance-parameter-group" {
+  name        = var.aurora_instance_parameter_group_name
+  family      = "aurora-mysql5.7"
+  description = "RDS terraform aurora instance parameter group"
+}
+
 #resource "aws_rds_cluster" "terraform-aurora-cluster" {
 #  cluster_identifier = var.db_cluster_name
 #  engine = "aurora-mysql"
