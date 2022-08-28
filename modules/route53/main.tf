@@ -12,3 +12,14 @@ resource "aws_route53_record" "terraform-yuta-alb" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "terraform-www-yuta-alb" {
+  zone_id = data.aws_route53_zone.yuta-aws.zone_id
+  name    = "www.yuta-aws.name"
+  type    = "A"
+  alias {
+    name                   = var.terraform_alb_name
+    zone_id                = var.terraform_alb_zone_id
+    evaluate_target_health = true
+  }
+}
