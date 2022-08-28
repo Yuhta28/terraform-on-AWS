@@ -4,10 +4,10 @@ resource "aws_security_group" "terraform-ec2-sg-for-fsx" {
   vpc_id      = var.terraform-vpc-id
 
   ingress {
-   from_port       = 2049
-   to_port         = 2049
-   protocol        = "tcp"
-   security_groups = [aws_security_group.terraform-alb-to-ec2.id]
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    security_groups = [aws_security_group.terraform-alb-to-ec2.id]
   }
 
   egress {

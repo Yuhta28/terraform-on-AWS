@@ -1,5 +1,5 @@
 variable "Tag_Name" {
-  type        = string
+  type    = string
   default = "staging"
 }
 
@@ -26,6 +26,16 @@ variable "ec2_to_db_security_groups_id" {
 variable "db_subnet_group_description" {
   type        = string
   description = "terraform-db-subnet-description"
+}
+
+variable "aurora_cluster_parameter_group_name" {
+  type        = string
+  description = "terraform-aurora-cluster-parameter-group"
+}
+
+variable "aurora_instance_parameter_group_name" {
+  type        = string
+  description = "terraform-aurora-instance-parameter-group"
 }
 
 variable "db_cluster_name" {
