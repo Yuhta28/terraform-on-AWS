@@ -5,7 +5,6 @@ resource "aws_db_subnet_group" "terraform-db-subnet" {
 
   tags = {
     Name      = var.db_subnet_group_name
-    Terraform = "True"
   }
 }
 
@@ -29,7 +28,6 @@ resource "aws_security_group" "terraform-ec2-to-db" {
   }
   tags = {
     Name      = "${var.Tag_Name}-ec2-to-db"
-    Terraform = "True"
   }
 }
 
@@ -52,9 +50,6 @@ resource "aws_rds_cluster" "terraform-aurora-cluster" {
   snapshot_identifier = "terraform-staging-snapshot"
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
-  tags = {
-    Terraform = "True"
-  }
 }
 
 resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
@@ -63,7 +58,4 @@ resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
   instance_class = var.db_cluster_instance
   db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
   engine = aws_rds_cluster.terraform-aurora-cluster.engine
-  tags = {
-    Terraform = "True"
-  }
 }

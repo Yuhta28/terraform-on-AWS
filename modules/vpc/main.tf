@@ -3,7 +3,6 @@ resource "aws_vpc" "terraform-vpc" {
   cidr_block           = var.cidr_block
   tags = {
     Name      = "${var.Tag_Name}-vpc"
-    Terraform = "True"
   }
 }
 
@@ -11,7 +10,6 @@ resource "aws_internet_gateway" "terraform-igw" {
   vpc_id = aws_vpc.terraform-vpc.id
   tags = {
     Name      = "${var.Tag_Name}-igw"
-    Terraform = "True"
   }
 }
 
@@ -23,7 +21,6 @@ resource "aws_subnet" "terraform-public-subnet" {
   map_public_ip_on_launch = true
   tags = {
     Name      = "terraform-${var.Tag_Name}-public-subnet-${each.key}"
-    Terraform = "True"
   }
 }
 
@@ -34,7 +31,6 @@ resource "aws_subnet" "terraform-private-subnet" {
   availability_zone = "ap-northeast-1${each.key}"
   tags = {
     Name      = "terraform-${var.Tag_Name}-private-subnet-${each.key}"
-    Terraform = "True"
   }
 }
 
@@ -70,7 +66,6 @@ resource "aws_route_table" "terraform-public-rt" {
   }
   tags = {
     Name      = "${var.Tag_Name}-public-rt-${each.key}"
-    Terraform = "True"
   }
 }
 
@@ -89,7 +84,6 @@ resource "aws_route_table" "terraform-private-rt" {
   #  }
   tags = {
     Name      = "${var.Tag_Name}-private-rt-${each.key}"
-    Terraform = "True"
   }
 }
 
