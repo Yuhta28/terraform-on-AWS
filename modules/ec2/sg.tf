@@ -19,6 +19,5 @@ resource "aws_security_group" "terraform-ec2-sg-for-fsx" {
   }
   tags = {
     Name      = "${var.Tag_Name}-fsx"
-    Terraform = "True"
   }
 }
