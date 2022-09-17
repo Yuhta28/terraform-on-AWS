@@ -11,12 +11,12 @@ resource "aws_instance" "terraform-ap-ec2" {
     volume_type = "gp3"
     volume_size = "30"
     tags = {
-      Name      = "${var.Tag_Name}-ebs"
+      Name      = "${var.Tag_Name}-ap"
       Terraform = "True"
     }
   }
   tags = {
-    Name      = "${var.Tag_Name}-ec2"
+    Name      = "${var.Tag_Name}-ap"
   }
 }
 
