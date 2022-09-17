@@ -50,7 +50,6 @@ resource "aws_lb" "terraform-alb" {
   subnets = var.terraform-public-subnet-id
   tags = {
     Name      = "${var.Tag_Name}-alb"
-    Terraform = "True"
   }
 }
 resource "aws_lb_listener" "terraform-alb-listener-http" {
