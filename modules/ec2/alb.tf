@@ -38,6 +38,8 @@ resource "aws_security_group_rule" "inbound_https" {
 }
 ##########################################################################
 
+##########################################################################
+# ALBリスナーセット
 resource "aws_lb" "terraform-alb" {
   name               = "${var.Tag_Name}-alb"
   load_balancer_type = "application"
@@ -51,7 +53,6 @@ resource "aws_lb" "terraform-alb" {
     Terraform = "True"
   }
 }
-
 resource "aws_lb_listener" "terraform-alb-listener-http" {
   load_balancer_arn = aws_lb.terraform-alb.arn
   port              = 80
@@ -66,7 +67,6 @@ resource "aws_lb_listener" "terraform-alb-listener-http" {
     }
   }
 }
-
 resource "aws_lb_listener" "terraform-alb-listener-https" {
   load_balancer_arn = aws_lb.terraform-alb.arn
   port              = 443
@@ -74,10 +74,24 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = data.aws_acm_certificate.yuta-aws.arn
   default_action {
-    target_group_arn = aws_lb_target_group.terraform-http.arn
-    type             = "forward"
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "503 Service Unavailable"
+      status_code  = "503"
+    }
   }
 }
+resource "aws_lb_listener_rule" "terraform-alb-listener-https-rule1" {
+  priority     = 1
+  listener_arn = aws_lb_listener.terraform-alb-listener-https.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.terraform-http.arn
+  }
+}
+##########################################################################
+
 
 ##########################################################################
 # WordPress AP EC2アタッチ用Target Group
