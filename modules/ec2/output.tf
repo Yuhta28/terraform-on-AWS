@@ -1,5 +1,5 @@
-output "sg-for-alb-to-ec2" {
-  value = aws_security_group.terraform-alb-to-ec2
+output "terraform-sg-attached-ap" {
+  value = aws_security_group.terraform-sg-attached-ap
 }
 
 output "terraform-alb" {
