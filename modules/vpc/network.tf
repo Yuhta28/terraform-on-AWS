@@ -53,7 +53,6 @@ resource "aws_nat_gateway" "terraform-nat" {
   allocation_id = aws_eip.terraform-nat-eip[each.key].id
   tags = {
     Name      = "${var.Tag_Name}-nat-${each.key}"
-    Terraform = "True"
   }
 }
 resource "aws_eip" "terraform-nat-eip" {
