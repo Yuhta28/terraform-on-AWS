@@ -21,29 +21,6 @@ resource "aws_instance" "terraform-ap-ec2" {
   }
 }
 
-resource "aws_instance" "terraform-ec2" {
-  count         = 1
-  ami           = var.ap_ami_name
-  instance_type = var.ec2_instance_type
-  subnet_id     = var.terraform-private-subnet-id[0]
-  key_name      = data.aws_key_pair.terraform-key-pair.key_name
-  vpc_security_group_ids = [
-    aws_security_group.terraform-sg-attached-ap.id
-  ]
-  root_block_device {
-    volume_type = "gp3"
-    volume_size = "30"
-    tags = {
-      Name      = "${var.Tag_Name}-ebs"
-      Terraform = "True"
-    }
-  }
-  tags = {
-    Name      = "${var.Tag_Name}-ec2"
-    Terraform = "True"
-  }
-}
-
 ##########################################################################
 # WordPress APサーバーにアタッチするためのSecurity Groupを作成
 resource "aws_security_group" "terraform-sg-attached-ap" {

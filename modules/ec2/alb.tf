@@ -80,7 +80,7 @@ resource "aws_lb_listener" "terraform-alb-listener-https" {
 }
 
 ##########################################################################
-# EC2アタッチ用Target Group
+# WordPress AP EC2アタッチ用Target Group
 resource "aws_lb_target_group" "terraform-http" {
   name     = "${var.Tag_Name}-tg-http"
   port     = 80
