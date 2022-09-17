@@ -3,9 +3,8 @@ variable "ec2_instance_type" {
   description = "Instance type"
 }
 
-variable "ami" {
-  type        = string
-  description = "ami id"
+variable "ap_ami_name" {
+  type = string
 }
 
 variable "Tag_Name" {
@@ -13,14 +12,14 @@ variable "Tag_Name" {
   description = "Tag Name"
 }
 
-variable "key_name" {
-  type        = string
-  description = "Tag Name"
-}
-
 variable "terraform-public-subnet-id" {
   type        = list(string)
   description = "terraform-public-subnet-id"
+}
+
+variable "terraform-private-subnet-id" {
+  type        = list(string)
+  description = "terraform-private-subnet-id"
 }
 
 variable "terraform-vpc-id" {

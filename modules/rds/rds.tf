@@ -56,7 +56,7 @@ resource "aws_rds_cluster" "terraform-aurora-cluster" {
   skip_final_snapshot    = true
   engine_mode            = "provisioned"
   vpc_security_group_ids = [aws_security_group.terraform-ec2-to-db.id]
-  kms_key_id = data.aws_kms_key.rds.arn
+  kms_key_id             = data.aws_kms_key.rds.arn
   enabled_cloudwatch_logs_exports = [
     "error",
     "general",
