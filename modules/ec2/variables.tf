@@ -3,17 +3,11 @@ variable "ec2_instance_type" {
   description = "Instance type"
 }
 
-variable "ami" {
-  type        = string
-  description = "ami id"
+variable "ap_ami_name" {
+  type = string
 }
 
 variable "Tag_Name" {
-  type        = string
-  description = "Tag Name"
-}
-
-variable "key_name" {
   type        = string
   description = "Tag Name"
 }
