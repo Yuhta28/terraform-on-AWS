@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "terraform-sg-rule-ec2-alb" {
   from_port                = 80
   to_port                  = 80
   protocol                 = "tcp"
-  source_security_group_id = aws_security_group.terraform-sg-attached-alb.id
+  source_security_group_id = aws_security_group.web_server_sg.id
   security_group_id        = aws_security_group.terraform-sg-attached-ap.id
   depends_on               = [aws_security_group.terraform-sg-attached-ap]
 }
