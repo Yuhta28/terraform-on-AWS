@@ -69,7 +69,6 @@ resource "aws_rds_cluster_instance" "terraform-aurora-cluster-instance" {
   instance_class       = var.db_cluster_instance
   db_subnet_group_name = aws_db_subnet_group.terraform-db-subnet.name
   engine               = aws_rds_cluster.terraform-aurora-cluster.engine
-  storage_encrypted    = true
   monitoring_interval  = 60
   monitoring_role_arn  = aws_iam_role.terraform-iam-role-rds-monitoring.arn
 }
