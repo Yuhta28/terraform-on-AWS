@@ -89,6 +89,11 @@ resource "aws_lb_listener_rule" "terraform-alb-listener-https-rule1" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.terraform-http.arn
   }
+  condition {
+    source_ip {
+      values = ["0.0.0.0/0"]
+    }
+  }
 }
 ##########################################################################
 
