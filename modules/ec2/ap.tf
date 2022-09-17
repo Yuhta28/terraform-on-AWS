@@ -6,7 +6,6 @@ resource "aws_instance" "terraform-ec2" {
   subnet_id     = var.terraform-private-subnet-id[0]
   key_name      = data.aws_key_pair.terraform-key-pair.key_name
   vpc_security_group_ids = [
-    aws_security_group.terraform-alb-to-ec2.id,
     aws_security_group.terraform-sg-attached-ap.id
   ]
   root_block_device {
