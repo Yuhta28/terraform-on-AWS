@@ -17,6 +17,11 @@ variable "terraform-public-subnet-id" {
   description = "terraform-public-subnet-id"
 }
 
+variable "terraform-private-subnet-id" {
+  type        = list(string)
+  description = "terraform-private-subnet-id"
+}
+
 variable "terraform-vpc-id" {
   type        = string
   description = "VPC ID"
