@@ -16,7 +16,7 @@ resource "aws_instance" "terraform-ap-ec2" {
     }
   }
   tags = {
-    Name      = "${var.Tag_Name}-ap"
+    Name = "${var.Tag_Name}-ap"
   }
 }
 

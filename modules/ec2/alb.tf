@@ -49,7 +49,7 @@ resource "aws_lb" "terraform-alb" {
   ]
   subnets = var.terraform-public-subnet-id
   tags = {
-    Name      = "${var.Tag_Name}-alb"
+    Name = "${var.Tag_Name}-alb"
   }
 }
 resource "aws_lb_listener" "terraform-alb-listener-http" {
