@@ -1,3 +1,3 @@
 output "terraform-codestarconnection" {
-    value = aws_codestarconnections_connection.YutaGitHub.name
+    value = data.aws_codestarconnections_connection.YutaGitHub.name
 }
