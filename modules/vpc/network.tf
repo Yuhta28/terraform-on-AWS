@@ -44,26 +44,26 @@ resource "aws_route_table_association" "terraform-public-rt-assoc" {
 }
 
 # NATゲートウェイリソース
-#resource "aws_nat_gateway" "terraform-nat" {
-#  for_each  = toset(var.eip-NAT-AZ)
-#  subnet_id = aws_subnet.terraform-public-subnet[each.key].id
-#  depends_on = [
-#    aws_internet_gateway.terraform-igw
-#  ]
-#  allocation_id = aws_eip.terraform-nat-eip[each.key].id
-#  tags = {
-#    Name      = "${var.Tag_Name}-nat-${each.key}"
-#  }
-#}
-#resource "aws_eip" "terraform-nat-eip" {
-#  for_each = toset(var.eip-NAT-AZ)
-#  tags = {
-#    Name = "${var.Tag_Name}-eip-${each.key}"
-#  }
-#  depends_on = [
-#    aws_internet_gateway.terraform-igw
-#  ]
-#}
+resource "aws_nat_gateway" "terraform-nat" {
+  for_each  = toset(var.eip-NAT-AZ)
+  subnet_id = aws_subnet.terraform-public-subnet[each.key].id
+  depends_on = [
+    aws_internet_gateway.terraform-igw
+  ]
+  allocation_id = aws_eip.terraform-nat-eip[each.key].id
+  tags = {
+    Name      = "${var.Tag_Name}-nat-${each.key}"
+  }
+}
+resource "aws_eip" "terraform-nat-eip" {
+  for_each = toset(var.eip-NAT-AZ)
+  tags = {
+    Name = "${var.Tag_Name}-eip-${each.key}"
+  }
+  depends_on = [
+    aws_internet_gateway.terraform-igw
+  ]
+}
 ##########################################################################
 
 ##########################################################################
@@ -78,20 +78,20 @@ resource "aws_subnet" "terraform-private-subnet" {
     Name = "terraform-${var.Tag_Name}-private-subnet-${each.key}"
   }
 }
-#resource "aws_route_table" "terraform-private-rt" {
-#  for_each = var.private-AZ
-#  vpc_id   = aws_vpc.terraform-vpc.id
-#  route {
-#    cidr_block     = "0.0.0.0/0"
-#    nat_gateway_id = var.Tag_Name == "staging" ? aws_nat_gateway.terraform-nat["a"].id : aws_nat_gateway.terraform-nat[each.key].id
-#  }
-#  tags = {
-#    Name = "${var.Tag_Name}-private-rt-${each.key}"
-#  }
-#}
-#resource "aws_route_table_association" "terraform-private-rt-assoc" {
-#  for_each       = var.public-AZ
-#  subnet_id      = aws_subnet.terraform-private-subnet[each.key].id
-#  route_table_id = aws_route_table.terraform-private-rt[each.key].id
-#}
+resource "aws_route_table" "terraform-private-rt" {
+  for_each = var.private-AZ
+  vpc_id   = aws_vpc.terraform-vpc.id
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = var.Tag_Name == "staging" ? aws_nat_gateway.terraform-nat["a"].id : aws_nat_gateway.terraform-nat[each.key].id
+  }
+  tags = {
+    Name = "${var.Tag_Name}-private-rt-${each.key}"
+  }
+}
+resource "aws_route_table_association" "terraform-private-rt-assoc" {
+  for_each       = var.public-AZ
+  subnet_id      = aws_subnet.terraform-private-subnet[each.key].id
+  route_table_id = aws_route_table.terraform-private-rt[each.key].id
+}
 ##########################################################################
